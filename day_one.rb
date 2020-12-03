@@ -3,6 +3,9 @@
 # Specifically, they need you to find the two entries that sum to 2020
 # and then multiply those two numbers together.
 
+# In your expense report, what is the product of the three entries that sum to 2020?
+
+test_inputs = [1721, 979, 366, 299, 675, 1456]
 inputs = [
     1779, 1737, 1537, 1167, 1804, 1873, 1894, 1446, 1262, 1608, 1430, 1421, 1826, 1718, 1888,
     1314, 1844, 248, 1812, 1627, 1605, 1641, 1126, 1051, 1839, 1067, 1685, 1800, 1383, 1415,
@@ -20,12 +23,40 @@ inputs = [
     1736, 1777, 1658, 1715
 ]
 
-def check(expense, remaining)
+def check_two(expense, remaining)
     result = remaining.find do |item|
         expense + item == 2020
     end
-    return print expense * result if result
-    check(remaining.shift, remaining) if remaining.any?
+    return print "Product: #{expense * result}\n" if result
+    check_two(remaining.shift, remaining) if remaining.any?
 end
 
-check(inputs.shift, inputs)
+def check_three(inputs)
+    i1 = 0
+    i2 = 1
+    i3 = 2
+    count = inputs.length
+    until i1 == count - 3
+        until i2 == count - 2
+            until i3 == count
+                set = [inputs[i1], inputs[i2], inputs[i3]]
+                return print "Product: #{set.reduce(:*)}\n" if set.sum == 2020 
+                i3 += 1
+            end
+            i2 +=1
+            i3 = i2 + 1
+        end
+        i1 += 1
+        i2 = i1 + 1
+        i3 = i2 + 1
+    end
+end
+
+args = ARGV
+inputs = test_inputs if args.include?('-t')
+
+if args.include?('check_three')
+    check_three(inputs)
+else
+    check_two(inputs.shift, inputs)
+end
