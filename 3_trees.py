@@ -7,7 +7,7 @@ slopes = [
     (1, 2)
 ]
 
-tree_map = open('trees.txt').read().split('\n')
+tree_map = open('inputs/3_trees.txt').read().split('\n')
 
 
 def count_trees_on_slope(slope, tree_map):

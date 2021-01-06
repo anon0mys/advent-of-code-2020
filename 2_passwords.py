@@ -1,4 +1,3 @@
-from passwords import lines
 # Inputs respect the format:
 # min_occurances-max_occurances letter: password
 # Output -> how many passwords are valid
@@ -7,6 +6,9 @@ test_lines = [
     '1-3 b: cdefg',
     '2-9 c: ccccccccc'
 ]
+
+lines = open('inputs/2_passwords.txt').read().split('\n')
+# lines = test_lines
 
 rule_function = 'positional'
 # rule_function = 'min_max'
@@ -27,7 +29,7 @@ def positional(password, letter, rule):
     return occurances == 1
 
 
-for line in test_lines:
+for line in lines:
     rule, letter, password = line.split(' ')
     letter = letter[0]
     rule = [int(i) for i in rule.split('-')]
